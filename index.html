@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Brook framework by silvioprog</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Brook framework</h1>
+        <p>The perfect framework for your web applications!</p>
+        <p class="view"><a href="https://github.com/silvioprog/brookframework">View the Project on GitHub <small>silvioprog/brookframework</small></a></p>
+        <ul>
+          <li><a href="https://github.com/silvioprog/brookframework/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/silvioprog/brookframework/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/silvioprog/brookframework">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>INTRODUCTION</h2>
+
+<p><strong>Brook framework</strong> is the perfect <a href="http://freepascal.org/">Free Pascal</a> framework for your web applications. It's pure Pascal. You don't need to leave your preferred programming language.</p>
+
+<p>It's complete: simple actions or configurable actions for database access, advanced routing features, wizard for <a href="http://lazarus.freepascal.org">Lazarus</a>, support for internationalization, high compatibility with <a href="http://json.org">JSON</a> structures, easy and elegant <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> implementation, plugins for varied needs, extensible and decoupled brokers... In fact, you have several reasons to adopt Brook as your web development framework.</p>
+
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>FEATURES</h2>
+
+<ul>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_083_random.png"> <strong>Advanced routes management</strong> – Actions are performed by means of routes. Brook knows how to receive a request and choose the correct URL and the correct method to reply to it.</li>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_141_database_plus.png"> <strong>Integrated data persistance</strong> – Brook offers a table object where data can be handled. Less instantiations, less coding, with an elegant syntax.</li>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_198_ok.png"> <strong>JSON native support</strong> – <a href="http://json.org">JSON</a> is widespred in the web for data exchange purposes. You will really appreciate Brooks' good JSON support.</li>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_340_globe.png"> <strong>REST architecture support</strong> – <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a> is an architecture able to simplify and standardize data requests and replies. Brook is powerful even if you don't use REST – but you will want to use it.</li>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_009_magic.png"> <strong>Lazarus wizards for installation and usage</strong> - With <a href="http://www.lazarus.freepascal.org">Lazarus</a>, development is easier; with the Brook wizards, only a few clicks are required to start and configure your Brook projects.</li>
+</ul><h2>
+<a name="get-started" class="anchor" href="#get-started"><span class="octicon octicon-link"></span></a>GET STARTED</h2>
+
+<h4>
+<a name="-if-you-use-free-pascal-only" class="anchor" href="#-if-you-use-free-pascal-only"><span class="octicon octicon-link"></span></a><img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_137_cogwheels.png">  If you use Free Pascal only:</h4>
+
+<p>Create three files:</p>
+
+<ul>
+<li>
+<code>cgi1.lpr</code>;</li>
+<li>
+<code>unit1.pas</code>;</li>
+<li>
+<code>brokers.pas</code>;</li>
+</ul><p>In <code>cgi1.lpr</code>, type:</p>
+
+<div class="highlight highlight-pascal"><pre><span class="k">program</span> <span class="n">cgi1</span><span class="o">;</span>
+
+<span class="cm">{$mode objfpc}{$H+}</span>
+
+<span class="k">uses</span>
+  <span class="n">BrookApplication</span><span class="o">,</span> <span class="n">Brokers</span><span class="o">,</span> <span class="n">Unit1</span><span class="o">;</span>
+
+<span class="k">begin</span>
+  <span class="n">BrookApp</span><span class="o">.</span><span class="n">Run</span><span class="o">;</span>
+<span class="k">end</span><span class="o">.</span>
+</pre></div>
+
+<p>In <code>unit1.pas</code>, type:</p>
+
+<div class="highlight highlight-pascal"><pre><span class="k">unit</span> <span class="n">Unit1</span><span class="o">;</span>
+
+<span class="cm">{$mode objfpc}{$H+}</span>
+
+<span class="k">interface</span>
+
+<span class="k">uses</span>
+  <span class="n">BrookAction</span><span class="o">;</span>
+
+<span class="k">type</span>
+  <span class="n">TMyAction</span> <span class="o">=</span> <span class="k">class</span><span class="p">(</span><span class="n">TBrookAction</span><span class="p">)</span>
+  <span class="kp">public</span>
+    <span class="k">procedure</span> <span class="nf">Get</span><span class="o">;</span> <span class="kp">override</span><span class="o">;</span>
+  <span class="k">end</span><span class="o">;</span>
+
+<span class="k">implementation</span>
+
+<span class="k">procedure</span> <span class="nc">TMyAction</span><span class="o">.</span><span class="nf">Get</span><span class="o">;</span>
+<span class="k">begin</span>
+  <span class="nb">Write</span><span class="p">(</span><span class="s">'Hello world!'</span><span class="p">)</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">initialization</span>
+  <span class="n">TMyAction</span><span class="o">.</span><span class="n">Register</span><span class="p">(</span><span class="s">'*'</span><span class="p">)</span><span class="o">;</span>
+
+<span class="k">end</span><span class="o">.</span>
+</pre></div>
+
+<p>In <code>brokers.pas</code>, type:</p>
+
+<div class="highlight highlight-pascal"><pre><span class="k">unit</span> <span class="n">Brokers</span><span class="o">;</span>
+
+<span class="cm">{$mode objfpc}{$H+}</span>
+
+<span class="k">interface</span>
+
+<span class="k">uses</span>
+  <span class="n">BrookFCLCGIBroker</span><span class="o">;</span>
+
+<span class="k">implementation</span>
+
+<span class="k">end</span><span class="o">.</span> 
+</pre></div>
+
+<p>Compile the project <code>cgi1.lpr</code> and copy the resulting file to CGI directory of your web server. Now, in your web browser, access the following URL:</p>
+
+<pre><code>http://localhost/cgi-bin/cgi1
+</code></pre>
+
+<hr><h4>
+<a name="-if-you-are-a-lazarus-user" class="anchor" href="#-if-you-are-a-lazarus-user"><span class="octicon octicon-link"></span></a><img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_009_magic.png">  if you are a Lazarus user:</h4>
+
+<p>Open and install the file <code>brookex.lpk</code>. After the installation, select <em>File | New ...</em> and, in <em>Brook framework</em>, choose the <em>Simple CGI application</em> option as shown in the figure below:</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/brook_new-project.png" alt="Brook - New project"></p>
+
+<p>Save and compile the project. Copy the resulting file to the CGI directory of your web server and enjoy! See the final result:</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/brook_hello-world.png" alt="Brook - Hello world"></p>
+
+<h2>
+<a name="plugins" class="anchor" href="#plugins"><span class="octicon octicon-link"></span></a>PLUGINS</h2>
+
+<ul>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_378_electrical_socket_eu.png"> <strong><a href="https://github.com/silvioprog/rutils">RUtils</a></strong> – This plugin offers some general purpose routines on string conversions, parsings, encodings and others.</li>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_378_electrical_socket_eu.png"> <strong><a href="http://silvioprog.github.io/jtemplate">JTemplate</a></strong> – This plugin helps you to fill variables in a template file.</li>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_378_electrical_socket_eu.png"> <strong><a href="https://github.com/leledumbo/QTemplate">QTemplate</a></strong> – This plugin implements an alternative to FPTemplate engine.</li>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_378_electrical_socket_eu.png"> <strong><a href="https://github.com/silvioprog/easyrss">EasyRSS</a></strong> – This plugin is the easiest way of Pascal developers provide news updating services in their applications.</li>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_378_electrical_socket_eu.png"> <strong><a href="https://github.com/silvioprog/xmailer">XMailer</a></strong> – This plugin offers a really simple way to send e-mails using Free Pascal..</li>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_378_electrical_socket_eu.png"> <strong><a href="https://github.com/silvioprog/algex">AlgEx</a></strong> – This plugin helps you to process algebric expressions passed as string.</li>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_378_electrical_socket_eu.png"> <strong><a href="https://github.com/silvioprog/captcha">Captcha</a></strong> – This plugin provides the handling of verification images, usually to block <em>bot</em> access in login pages.</li>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_378_electrical_socket_eu.png"> <strong><a href="https://github.com/silvioprog/mgeoip">MGeoIP</a></strong> – This plugin allows you to identify the name of country or city which IPs come from.</li>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_378_electrical_socket_eu.png"> <strong><a href="https://github.com/silvioprog/convutils">ConvUtils</a></strong> – This plugin allows you to convert one measure (centimeters, inches, liters etc.) to another.</li>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_378_electrical_socket_eu.png"> <strong><a href="https://github.com/silvioprog/htmldoc">HtmlDoc</a></strong> – Whith this plugin you can write headers, body and other relevant tags using Object Pascal.</li>
+<li>
+<img src="https://dl.dropboxusercontent.com/u/135304375/cdn/img/glyphicons_378_electrical_socket_eu.png"> <strong><a href="https://github.com/silvioprog/ljgridutils">LJGridUtils</a></strong> – This plugin offers easy conversion from LCL to JSON and vice versa.</li>
+</ul><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>LICENSE</h2>
+
+<p>The source code of the Brook framework is distributed under the GNU Lesser General Public License. See the <a href="https://github.com/silvioprog/brookframework/blob/master/LICENSE.txt">project licence</a> for copyright/license details.</p>
+
+<h2>
+<a name="system-requirements" class="anchor" href="#system-requirements"><span class="octicon octicon-link"></span></a>SYSTEM REQUIREMENTS</h2>
+
+<p><strong>Free Pascal 2.6.2 or newer</strong>. If you prefer the Lazarus interface, choose the <strong>1.0.8 version or newer</strong>.</p>
+
+<h2>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>DOCUMENTATION</h2>
+
+<p>The project documentation is available in two formats: <a href="https://dl.dropboxusercontent.com/u/135304375/brookframework/doc/index.html">HTML</a> and <a href="https://dl.dropboxusercontent.com/u/135304375/brookframework/doc/brookframework-ref.pdf">PDF</a>.</p>
+
+<h2>
+<a name="demos" class="anchor" href="#demos"><span class="octicon octicon-link"></span></a>DEMOS</h2>
+
+<p>If you want to see Brook in action, then take a look a database demo <a href="http://brookframework.org/cgi-bin/chat.bf">here</a> and a simple chat <a href="https://dl.dropboxusercontent.com/u/135304375/brookframework/demos/index.html">here</a>.</p>
+
+<h2>
+<a name="versioning" class="anchor" href="#versioning"><span class="octicon octicon-link"></span></a>VERSIONING</h2>
+
+<p>For transparency and insight into our release cycle, and for striving to maintain backward compatibility, Brook framework will be maintained under the Semantic Versioning guidelines as much as possible.</p>
+
+<p>Releases will be numbered with the following format:</p>
+
+<p><code>&lt;major&gt;.&lt;minor&gt;.&lt;release&gt;</code></p>
+
+<p>And constructed with the following guidelines:</p>
+
+<ul>
+<li>Breaking backward compatibility bumps the major (and resets the minor and release);</li>
+<li>New additions without breaking backward compatibility bumps the minor (and resets the release);</li>
+<li>Bug fixes and misc changes bumps the release;</li>
+</ul><p>For more information on SemVer, please visit <a href="http://semver.org">http://semver.org</a>.</p>
+
+<h2>
+<a name="support-bugs-contact" class="anchor" href="#support-bugs-contact"><span class="octicon octicon-link"></span></a>SUPPORT, BUGS, CONTACT</h2>
+
+<p>Please use the <a href="https://github.com/silvioprog/brookframework/issues">issues page</a>. Your cooperation will be appreciated.</p>
+
+<h2>
+<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>CONTRIBUTORS</h2>
+
+<p>Brook would not be possible without important and active contributors. See their names <a href="https://github.com/silvioprog/brookframework/blob/master/CONTRIBUTORS.txt">here</a>.</p>
+
+<h2>
+<a name="donors" class="anchor" href="#donors"><span class="octicon octicon-link"></span></a>DONORS</h2>
+
+<p>Make a donation to the project, it's extremely easy, free, fast and secure!</p>
+
+<p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=GE9VT768TLP74&amp;lc=GB&amp;item_name=Brook%20framework&amp;item_number=brookframework&amp;currency_code=USD&amp;bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">
+  <img src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif"></a></p>
+
+<p>See the name of all donors <a href="https://github.com/silvioprog/brookframework/blob/master/DONORS.txt">here</a>.</p>
+
+<h2>
+<a name="download" class="anchor" href="#download"><span class="octicon octicon-link"></span></a>DOWNLOAD</h2>
+
+<p>You can download the last release <a href="https://github.com/silvioprog/brookframework/releases">here</a>. Alternatively, you can also follow the project's GIT repository. The address is:</p>
+
+<p><code>git://github.com/silvioprog/brookframework.git</code></p>
+
+<h2>
+<a name="welcome-to-world-of-brook-" class="anchor" href="#welcome-to-world-of-brook-"><span class="octicon octicon-link"></span></a>Welcome to world of Brook! <img src="http://l.yimg.com/us.yimg.com/i/mesg/emoticons7/113.gif" alt="Welcome to the Brook's world!">
+</h2>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/silvioprog">silvioprog</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-37786699-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
