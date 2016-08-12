@@ -302,6 +302,18 @@ footer p + p {
   float: right;
 }
 
+.info {
+  background: #d9edf7;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-color: #9acfea;
+  border-radius: 4px;
+  text-align: center;
+}
+.info strong {
+  color: #31708f;
+}
+
 @media print, screen and (max-width: 740px) {
   body {
     padding: 0;
